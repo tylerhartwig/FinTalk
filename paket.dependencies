@@ -1,0 +1,7 @@
+source https://api.nuget.org/v3/index.json
+
+clitool dotnet-fable 
+
+nuget Fable.Core
+nuget Fable.React
+nuget Fable.Elmish.React
