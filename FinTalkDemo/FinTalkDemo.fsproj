@@ -4,10 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Library.fs" />
+    <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="paket.references" />
+    <Compile Include="App.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="public\index.html" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
