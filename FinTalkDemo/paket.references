@@ -1,4 +1,6 @@
 dotnet-fable
+
 Fable.Core
 Fable.React
 Fable.Elmish.React
+FSharp.Data
