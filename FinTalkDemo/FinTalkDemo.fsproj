@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="DataSetup.fsx" />
+    <None Include="GeoCoding.fsx" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
@@ -12,6 +13,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="public\index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Geocoding\opencage.yaml" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
