@@ -50,10 +50,13 @@ module Result =
 let result = ResultBuilder()
 
 [<Literal>]
-let localConnectionString = "Host=localhost;Username=test;Password=test;Database=test"
+let localConnectionString = "Host=localhost;Username=test;Password=test;Database=test;"
 
 [<Literal>]
 let jsonDataFile = "/Users/tylerhartwig/FinTalkDemo/data/yelp_academic_dataset_business.json"
+
+[<Literal>]
+let sampleJson = "/Users/tylerhartwig/FinTalkDemo/data/sample.json"
 
 let readLines (filePath:string) = 
     seq {
@@ -61,18 +64,32 @@ let readLines (filePath:string) =
         while not sr.EndOfStream do 
             yield sr.ReadLine()
     }
+    
 
-type Data = NpgsqlConnection<Connection = localConnectionString, Fsx = true>
-// let localConnection = new Npgsql.NpgsqlConnection<Connection = localConnectionString>(localConnectionString)
-type BusinessSource = FSharp.Data.JsonProvider<jsonDataFile, SampleIsList=true>
+type Data = NpgsqlConnection<Connection = localConnectionString>
+type BusinessSource = FSharp.Data.JsonProvider<sampleJson, SampleIsList=true>
 
-let insertCmd = 
-        new NpgsqlCommand<"""
-                INSERT INTO "FinTalk"."Businesses" (name, latitude, longitude, stars, num_reviews)
-                VALUES(@name, @latitude, @longitude, @stars, @numReviews)
-        """, localConnectionString>(localConnectionString)
+//
+//readLines jsonDataFile
+//    |> Seq.mapi (fun i s -> BusinessSource.Parse s)
+//    |> Seq.filter (fun x -> 
+//        match x.Latitude, x.Longitude with 
+//        | Some _, Some _ -> true
+//        | _ -> false)
+//    |> Seq.map (fun b -> string b.Name)
+//    |> Seq.iter(fun s -> printfn "%s" s)
 
-let insertData (rawData:BusinessSource.Root) = 
+let nextBusinessId conn tx =
+    use cmd = Data.CreateCommand<"""
+        SELECT NEXTVAL(pg_get_serial_sequence('"FinTalk"."Businesses"', 'id'));
+    """, SingleRow = true, XCtor = true>(conn, tx)
+    let value = cmd.Execute () |> Option.flatten |> Option.map int
+    printfn "%A" value
+    value
+    
+let businesses = new Data.FinTalk.Tables.Businesses()
+
+let addRow conn tx (rawData:BusinessSource.Root) =
     let unwrapOption = function 
         | Some v -> Ok v
         | None -> Error ["Expected a value, but received \"None\""]
@@ -80,20 +97,37 @@ let insertData (rawData:BusinessSource.Root) =
     result { 
         let! latitude = unwrapOption rawData.Latitude
         let! longitude = unwrapOption rawData.Longitude
-        return insertCmd.Execute(string rawData.Name, float latitude, float longitude, (float rawData.Stars), rawData.ReviewCount)
+        return businesses.AddRow(
+                nextBusinessId conn tx,
+                name = string rawData.Name,
+                latitude = float latitude,
+                longitude = float longitude,
+                stars = float rawData.Stars,
+                num_reviews = rawData.ReviewCount)
     }
 
+let bulkInsert connection tx data =
+    result {
+        let! result = data |> Result.traverse (addRow connection tx)
+        businesses.BinaryImport(connection)
+        return result
+    }
 
-let rowsInserted = 
-    readLines jsonDataFile 
-        |> Seq.map BusinessSource.Parse
-        |> Seq.filter (fun x -> 
-            match x.Latitude, x.Longitude with 
-            | Some _, Some _ -> true
-            | _ -> false)
-        |> Result.traverse insertData
-        |> Result.bind (Seq.reduce (+) >> Ok)
+let rowsInserted =
+    use conn = new Npgsql.NpgsqlConnection(localConnectionString)
+    conn.Open()
+    use tx = conn.BeginTransaction()
+    let result =
+        readLines jsonDataFile 
+            |> Seq.map BusinessSource.Parse
+            |> Seq.filter (fun x -> 
+                match x.Latitude, x.Longitude with 
+                | Some _, Some _ -> true
+                | _ -> false)
+            |> bulkInsert conn tx
+    tx.Commit()
+    result
 
 match rowsInserted with 
-| Ok n -> printfn "Inserted %i rows" n 
+| Ok n -> printfn "Inserted rows successfully" 
 | Error e -> printfn "Failed with: %A" e

@@ -4,3 +4,4 @@ Fable.Core
 Fable.React
 Fable.Elmish.React
 FSharp.Data
+FSharp.Data.Npgsql
