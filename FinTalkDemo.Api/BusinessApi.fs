@@ -14,29 +14,36 @@ type radiusCmd =
     NpgsqlCommand<"""
         SET SEARCH_PATH TO public, "FinTalk";
         SELECT * FROM "FinTalk"."Businesses"
-            WHERE public.earth_box(public.ll_to_earth(@latitude, @longitude), @radius) @> public.ll_to_earth(latitude, longitude);
+            WHERE public.earth_box(public.ll_to_earth(@latitude, @longitude), @radius) @> public.ll_to_earth(latitude, longitude)
+            LIMIT 50;
     """, postgresConnectionString>
         
 let radiusSearch radius lat long =
     async {
         use cmd = radiusCmd.Create(postgresConnectionString)
-        let! results = cmd.AsyncExecute(lat, long, meterPerMile * radius)
+        let! results = cmd.AsyncExecute(lat, long, meterPerMile * radius) 
         let mapRecord (record : radiusCmd.Record) =
             {
                 Name = record.name
+                Rating = record.stars
+                NumReviews = record.num_reviews
             }
             
         return results |> Seq.map mapRecord |> Seq.toList
     }
+    
+    
 
-let [<Literal>] swaggerSchema = __SOURCE_DIRECTORY__ + "/Geocoding/opencage.yaml"
 let [<Literal>] openApiSchema = __SOURCE_DIRECTORY__ + "/Geocoding/OpenApiOpenCage.yaml"
 let key = "2ce68dfa781549c3afd47ae64a6e4308"
 
 type GeoCoding = OpenAPIV3Provider<openApiSchema>
 let geoCoding = new GeoCoding()
 
-
+let unwrapLatLong (result : GeoCoding.Schemas.Response_Results) =
+    result.Geometry
+        |> Option.map (fun g -> (g.Lat, g.Lng) ||> Option.map2 (fun lat long -> lat, long)) 
+        |> Option.flatten
 
 let geoCodingSearch term =
     let json =
@@ -50,9 +57,7 @@ let geoCodingSearch term =
         | Some [] -> 
             return None
         | Some(head::tail) -> 
-            return head.Geometry 
-                |> Option.map (fun g -> (g.Lat, g.Lng) ||> Option.map2 (fun lat long -> lat, long)) 
-                |> Option.flatten
+            return head |> unwrapLatLong
     }
 
 let searchBusinesses searchTerm radius = 

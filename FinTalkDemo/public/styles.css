@@ -1,0 +1,39 @@
+body {
+    background: #b8e7ff;
+}
+
+input, button {
+    border-radius: 5px;
+    border-style: none;
+    font-size: 26px;
+    margin: 4px;
+}
+
+button {
+    background: #ffde75;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 5fr 1fr 2fr;
+    list-style-type: none;
+    width: 500px
+}
+
+span {
+    border: 1px solid #3b5dff;
+}
+
+span:nth-child(3n+1) {
+    justify-self: stretch;
+}
+
+span:nth-child(3n+2) {
+    justify-self: stretch;
+    text-align: center
+}
+
+span:nth-child(3n+0) {
+    justify-self: stretch;
+    text-align: center
+}

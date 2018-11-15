@@ -14,6 +14,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="public\index.html" />
+    <Content Include="public\styles.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="webpack.config.js" />

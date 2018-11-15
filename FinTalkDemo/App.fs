@@ -41,8 +41,20 @@ let update msg model =
         model, cmd
         
     
-let mapBusinessView (business:Business) = 
-    li [] [ str business.Name ]
+let mapBusinessView (business:Business) =
+    seq {
+        yield span [] [ str business.Name ]
+        yield span [] [ str (sprintf "%.1f" business.Rating) ]
+        yield span [] [ str (sprintf "%i" business.NumReviews) ]
+    }
+
+let gridHeader =
+    seq {
+        yield span [] [ str "Business" ]
+        yield span [] [ str "Rating" ]
+        yield span [] [ str "Review Count" ]
+    }
+     
     
 // View 
 let view model dispatch =
@@ -51,7 +63,8 @@ let view model dispatch =
             div [] [
                 input [ OnChange (fun v -> UpdateSearchTerm v.Value |> dispatch) ]
                 button [ OnClick (fun _ -> Search |> dispatch) ] [ str "Search" ] ]
-            div [] [ ul [] (model.businesses |> List.map mapBusinessView) ]
+                
+            main [] (model.businesses |> List.map mapBusinessView |> List.fold Seq.append gridHeader)
         ]
 
         
