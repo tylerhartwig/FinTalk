@@ -100,7 +100,12 @@ let main argv =
                     latitude = float latitude,
                     longitude = float longitude,
                     stars = float rawData.Stars,
-                    num_reviews = rawData.ReviewCount)
+                    num_reviews = rawData.ReviewCount,
+                    neighborhood = rawData.Neighborhood,
+                    address = rawData.Address,
+                    city = Some rawData.City,
+                    state = Some rawData.State,
+                    postal_code = Some (string rawData.PostalCode))
         }
 
     let bulkInsert data connection =

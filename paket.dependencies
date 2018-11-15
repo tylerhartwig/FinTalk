@@ -5,9 +5,12 @@ clitool dotnet-fable
 nuget Fable.Core
 nuget Fable.React
 nuget Fable.Elmish.React
+nuget Fable.Remoting.AspNetCore
+nuget Fable.Remoting.Client
 nuget FSharp.Data
 
 nuget SwaggerProvider
+nuget OpenAPITypeProvider
 
 
 nuget FSharp.Data.Npgsql
@@ -16,5 +19,3 @@ nuget Microsoft.Extensions.Configuration.Abstractions
 nuget Microsoft.Extensions.Configuration.EnvironmentVariables
 nuget Microsoft.Extensions.Configuration.Json
 nuget Microsoft.Extensions.Configuration.UserSecrets
-
-

@@ -9,7 +9,13 @@ module.exports = {
     },
     devServer: {
         contentBase: "./public",
-        port: 8080
+        port: 8080,
+        proxy: {
+            '/api/*': {
+                target: "http://localhost:5000",
+                changeOrigin: true
+            }
+        }
     },
     module: {
         rules: [{

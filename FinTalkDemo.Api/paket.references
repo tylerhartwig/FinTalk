@@ -1,0 +1,4 @@
+FSharp.Data
+FSharp.Data.Npgsql
+Fable.Remoting.AspNetCore
+OpenAPITypeProvider

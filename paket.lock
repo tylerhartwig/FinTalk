@@ -1,16 +1,16 @@
 NUGET
   remote: https://api.nuget.org/v3/index.json
-    dotnet-fable (2.0.8) - clitool: true
-      Dotnet.ProjInfo (>= 0.9) - restriction: >= netcoreapp2.0
+    dotnet-fable (2.0.9) - clitool: true
+      Dotnet.ProjInfo (>= 0.20) - restriction: >= netcoreapp2.0
       FSharp.Compiler.Service (>= 25.0.1) - restriction: >= netcoreapp2.0
       FSharp.Core (>= 4.5.2) - restriction: >= netcoreapp2.0
       Microsoft.NETCore.App (>= 2.0) - restriction: >= netcoreapp2.0
       Newtonsoft.Json (>= 11.0.2) - restriction: >= netcoreapp2.0
-    Dotnet.ProjInfo (0.12.2) - restriction: >= netcoreapp2.0
+    Dotnet.ProjInfo (0.20) - restriction: >= netcoreapp2.0
       FSharp.Core (>= 4.1.18) - restriction: && (< net45) (>= netstandard2.0)
     Fable.Core (2.0.1)
       FSharp.Core (>= 4.5.2) - restriction: >= netstandard2.0
-    Fable.Elmish (2.0) - restriction: >= netstandard2.0
+    Fable.Elmish (2.0.3) - restriction: >= netstandard2.0
       Fable.Core (>= 2.0) - restriction: >= netstandard2.0
       Fable.PowerPack (>= 2.0.1) - restriction: >= netstandard2.0
       FSharp.Core (>= 4.5.2) - restriction: >= netstandard2.0
@@ -22,14 +22,38 @@ NUGET
       FSharp.Core (>= 4.5.2) - restriction: >= netstandard2.0
     Fable.Import.Browser (1.3) - restriction: >= netstandard2.0
       Fable.Core (>= 1.3.17) - restriction: >= netstandard1.6
+    Fable.Parsimmon (3.1) - restriction: >= netstandard2.0
+      Fable.Core (>= 2.0) - restriction: >= netstandard2.0
+      FSharp.Core (>= 4.5.2) - restriction: >= netstandard2.0
     Fable.PowerPack (2.0.1) - restriction: >= netstandard2.0
       Fable.Core (>= 2.0) - restriction: >= netstandard2.0
       Fable.Import.Browser (>= 1.3) - restriction: >= netstandard2.0
       FSharp.Core (>= 4.5.2) - restriction: >= netstandard2.0
       Thoth.Json (>= 2.0) - restriction: >= netstandard2.0
-    Fable.React (4.1.1)
+    Fable.React (4.1.3)
       Fable.Core (>= 2.0) - restriction: >= netstandard2.0
       Fable.Import.Browser (>= 1.3) - restriction: >= netstandard2.0
+      FSharp.Core (>= 4.5.2) - restriction: >= netstandard2.0
+    Fable.Remoting.AspNetCore (1.4)
+      Fable.Remoting.Json (>= 2.2) - restriction: >= netstandard2.0
+      Fable.Remoting.Server (>= 4.4) - restriction: >= netstandard2.0
+      FSharp.Core (>= 4.3.4) - restriction: >= netstandard2.0
+      Microsoft.AspNetCore.Http.Abstractions (>= 2.0.1) - restriction: >= netstandard2.0
+      TaskBuilder.fs (>= 1.1.1) - restriction: >= netstandard2.0
+    Fable.Remoting.Client (4.5.2)
+      Fable.Core (>= 2.0) - restriction: >= netstandard2.0
+      Fable.Import.Browser (>= 1.3) - restriction: >= netstandard2.0
+      Fable.SimpleJson (>= 2.6.1) - restriction: >= netstandard2.0
+      FSharp.Core (>= 4.5.2) - restriction: >= netstandard2.0
+    Fable.Remoting.Json (2.2) - restriction: >= netstandard2.0
+      FSharp.Core (>= 4.3.4) - restriction: || (>= net45) (>= netstandard2.0)
+      Newtonsoft.Json (>= 11.0.1) - restriction: || (>= net45) (>= netstandard2.0)
+    Fable.Remoting.Server (4.4) - restriction: >= netstandard2.0
+      Fable.Remoting.Json (>= 2.2) - restriction: || (>= net45) (>= netstandard2.0)
+      FSharp.Core (>= 4.3.4) - restriction: || (>= net45) (>= netstandard2.0)
+    Fable.SimpleJson (2.6.1) - restriction: >= netstandard2.0
+      Fable.Core (>= 2.0) - restriction: >= netstandard2.0
+      Fable.Parsimmon (>= 3.1) - restriction: >= netstandard2.0
       FSharp.Core (>= 4.5.2) - restriction: >= netstandard2.0
     FSharp.Compiler.Service (25.0.1) - restriction: >= netcoreapp2.0
       FSharp.Core (>= 4.1.18) - restriction: || (>= net45) (>= netstandard2.0)
@@ -48,6 +72,11 @@ NUGET
     FSharp.Data.Npgsql (0.1.44-beta)
       Npgsql (>= 4.0.3)
       Npgsql.LegacyPostgis (>= 1.0)
+    Microsoft.AspNetCore.Http.Abstractions (2.1.1) - restriction: >= netstandard2.0
+      Microsoft.AspNetCore.Http.Features (>= 2.1.1) - restriction: >= netstandard2.0
+      System.Text.Encodings.Web (>= 4.5) - restriction: >= netstandard2.0
+    Microsoft.AspNetCore.Http.Features (2.1.1) - restriction: >= netstandard2.0
+      Microsoft.Extensions.Primitives (>= 2.1.1) - restriction: >= netstandard2.0
     Microsoft.Extensions.Configuration (2.1.1)
       Microsoft.Extensions.Configuration.Abstractions (>= 2.1.1) - restriction: >= netstandard2.0
     Microsoft.Extensions.Configuration.Abstractions (2.1.1)
@@ -92,7 +121,7 @@ NUGET
       System.Memory (>= 4.5) - restriction: || (&& (< net46) (< netcoreapp2.0) (>= netstandard2.0) (< xamarinios)) (&& (>= netcoreapp2.0) (< netcoreapp2.1)) (>= uap10.1)
       System.Security.AccessControl (>= 4.5) - restriction: || (&& (>= monoandroid) (< netstandard2.0)) (>= monotouch) (&& (< net46) (>= netstandard2.0)) (>= net461) (>= netcoreapp2.0) (>= xamarinios) (>= xamarinmac) (>= xamarintvos) (>= xamarinwatchos)
       System.Security.Principal.Windows (>= 4.5) - restriction: || (&& (>= monoandroid) (< netstandard2.0)) (>= monotouch) (&& (< net46) (>= netstandard2.0)) (>= net461) (>= netcoreapp2.0) (>= xamarinios) (>= xamarinmac) (>= xamarintvos) (>= xamarinwatchos)
-    NETStandard.Library (2.0.3) - restriction: >= netcoreapp2.1
+    NETStandard.Library (2.0.3) - restriction: || (&& (< net45) (>= netstandard2.0)) (>= netcoreapp2.1)
       Microsoft.NETCore.Platforms (>= 1.1) - restriction: || (&& (>= net45) (< netstandard1.3)) (&& (< net45) (>= netstandard1.1) (< netstandard1.2) (< win8)) (&& (< net45) (>= netstandard1.2) (< netstandard1.3) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.3) (< netstandard1.4) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.4) (< netstandard1.5) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.5) (< netstandard1.6) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.6) (< netstandard2.0) (< win8) (< wpa81)) (&& (< net45) (>= netstandard2.0)) (&& (>= net46) (< netstandard1.4)) (>= net461) (>= netcoreapp2.0) (&& (>= netstandard1.0) (< portable-net45+win8+wpa81)) (&& (< netstandard1.0) (>= portable-net45+win8) (< win8)) (&& (< netstandard1.0) (< portable-net45+win8) (>= portable-net45+win8+wpa81)) (&& (< netstandard1.0) (>= portable-net45+win8+wp8+wpa81) (< portable-net45+win8+wpa81)) (&& (< netstandard1.0) (>= win8)) (&& (< netstandard1.3) (< win8) (>= wpa81)) (&& (< netstandard1.5) (>= uap10.0)) (>= uap10.1) (>= wp8)
     Newtonsoft.Json (11.0.2)
     Npgsql (4.0.3)
@@ -101,6 +130,13 @@ NUGET
       System.ValueTuple (>= 4.5) - restriction: || (&& (>= net45) (< netstandard2.0)) (&& (< net45) (>= netstandard2.0)) (>= net451)
     Npgsql.LegacyPostgis (1.0)
       Npgsql (>= 4.0) - restriction: || (>= net45) (>= netstandard2.0)
+    OpenAPIParser (2.0.1) - restriction: || (>= net45) (>= netstandard2.0)
+      FSharp.Core (>= 4.3.4) - restriction: || (>= net45) (>= netstandard1.6)
+      Newtonsoft.Json (>= 10.0.1) - restriction: || (>= net45) (>= netstandard1.6)
+      YamlDotNet (>= 4.3.1) - restriction: || (>= net45) (>= netstandard1.6)
+    OpenAPITypeProvider (2.1)
+      FSharp.Core (>= 4.3.4) - restriction: && (< net45) (< netstandard2.0)
+      OpenAPIParser (>= 2.0.1 < 3.0) - restriction: || (>= net45) (>= netstandard2.0)
     runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl (4.3.3) - restriction: >= netcoreapp2.0
     runtime.debian.9-x64.runtime.native.System.Security.Cryptography.OpenSsl (4.3.3) - restriction: >= netcoreapp2.0
     runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl (4.3.3) - restriction: >= netcoreapp2.0
@@ -337,6 +373,7 @@ NUGET
       Microsoft.NETCore.Targets (>= 1.1) - restriction: || (>= dnxcore50) (&& (< monoandroid) (< monotouch) (< net45) (>= netstandard1.3) (< win8) (< wpa81) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net45) (>= netstandard1.0) (< netstandard1.3) (< win8) (< wp8) (< wpa81))
       System.Runtime (>= 4.3) - restriction: || (>= dnxcore50) (&& (< monoandroid) (< monotouch) (< net45) (>= netstandard1.3) (< win8) (< wpa81) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net45) (>= netstandard1.0) (< netstandard1.3) (< win8) (< wp8) (< wpa81))
       System.Text.Encoding (>= 4.3) - restriction: || (>= dnxcore50) (&& (< monoandroid) (< monotouch) (< net45) (>= netstandard1.3) (< win8) (< wpa81) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net45) (>= netstandard1.0) (< netstandard1.3) (< win8) (< wp8) (< wpa81))
+    System.Text.Encodings.Web (4.5) - restriction: >= netstandard2.0
     System.Threading (4.3) - restriction: >= netcoreapp2.0
       System.Runtime (>= 4.3) - restriction: || (>= dnxcore50) (&& (< monoandroid) (< monotouch) (< net45) (>= netstandard1.3) (< win8) (< wpa81) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net45) (>= netstandard1.0) (< netstandard1.3) (< win8) (< wp8) (< wpa81))
       System.Threading.Tasks (>= 4.3) - restriction: || (>= dnxcore50) (&& (< monoandroid) (< monotouch) (< net45) (>= netstandard1.3) (< win8) (< wpa81) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net45) (>= netstandard1.0) (< netstandard1.3) (< win8) (< wp8) (< wpa81))
@@ -351,7 +388,12 @@ NUGET
     System.Threading.ThreadPool (4.3) - restriction: >= netcoreapp2.0
       System.Runtime (>= 4.3) - restriction: && (< monoandroid) (< monotouch) (< net46) (>= netstandard1.3) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)
       System.Runtime.Handles (>= 4.3) - restriction: && (< monoandroid) (< monotouch) (< net46) (>= netstandard1.3) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)
-    System.ValueTuple (4.5) - restriction: || (&& (>= net45) (< netstandard2.0)) (&& (< net45) (>= netstandard2.0)) (>= net451)
-    Thoth.Json (2.3) - restriction: >= netstandard2.0
+    System.ValueTuple (4.5) - restriction: || (&& (>= net45) (< net46) (< netstandard1.6) (>= netstandard2.0)) (&& (>= net45) (< netstandard2.0)) (&& (< net45) (>= netstandard2.0)) (>= net451) (&& (>= net46) (< netstandard1.6) (>= netstandard2.0)) (&& (>= net47) (>= netstandard2.0))
+    TaskBuilder.fs (2.1) - restriction: >= netstandard2.0
+      FSharp.Core (>= 4.1.17) - restriction: || (&& (>= net45) (< net46) (< netstandard1.6)) (&& (< net45) (>= netstandard1.6)) (&& (>= net46) (< netstandard1.6)) (>= net47)
+      NETStandard.Library (>= 1.6.1) - restriction: && (< net45) (>= netstandard1.6)
+      System.ValueTuple (>= 4.4) - restriction: || (&& (>= net45) (< net46) (< netstandard1.6)) (&& (< net45) (>= netstandard1.6)) (&& (>= net46) (< netstandard1.6)) (>= net47)
+    Thoth.Json (2.5) - restriction: >= netstandard2.0
       Fable.Core (>= 2.0) - restriction: >= netstandard2.0
       FSharp.Core (>= 4.5.2) - restriction: >= netstandard2.0
+    YamlDotNet (5.2.1) - restriction: || (>= net45) (>= netstandard2.0)
